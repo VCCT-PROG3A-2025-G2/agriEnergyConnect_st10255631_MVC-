@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using System.Threading.Tasks;
 using AgriEnergyConnect_st10255631_MVC.Models;
 using AgriEnergyConnect_st10255631_MVC.Repositories;
 using Microsoft.Extensions.Logging;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
+
 
 namespace AgriEnergyConnect_st10255631_MVC.Services
 {
@@ -21,17 +24,19 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             _logger = logger;
         }
 
+        // Retrieves all farmers asynchronously
         public async Task<IEnumerable<Farmer>> GetAllFarmersAsync()
         {
             return await _farmerRepository.GetAllFarmersAsync();
         }
 
-
+        // Retrieves a farmer by the associated user ID asynchronously
         public async Task<Farmer?> GetFarmerByUserIdAsync(int userId)
         {
             return await _farmerRepository.GetFarmerByUserIdAsync(userId);
         }
 
+        // Creates a new user and farmer record based on the provided view model
         public async Task<(bool Success, string? ErrorMessage)> CreateFarmerWithUserAsync(AddFarmerViewModel model)
         {
             // Check if username already exists
@@ -50,6 +55,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
 
             try
             {
+                // Add the new user to the database
                 await _userRepository.AddUserAsync(newUser);
 
                 var newFarmer = new Farmer

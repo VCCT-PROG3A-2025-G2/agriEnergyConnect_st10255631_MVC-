@@ -1,10 +1,13 @@
-﻿using System;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Models;
 
+
+// Represents a product entity in the system
 public class Product
 {
     [Key]

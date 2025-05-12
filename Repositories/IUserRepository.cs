@@ -1,12 +1,17 @@
-﻿using AgriEnergyConnect_st10255631_MVC.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using System.Threading.Tasks;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
+
 
 namespace AgriEnergyConnect_st10255631_MVC.Repositories
 {
     public interface IUserRepository
     {
+        // Retrieves a user by their username
         Task<User?> GetUserByUsernameAsync(string username);
         Task<User?> GetUserByIdAsync(int userId);
+        // Adds a new user to the database
         Task AddUserAsync(User user);
 
 

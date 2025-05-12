@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Models;
 
+// Represents a user in the system Employee or Farmer
 public class User
 {
     [Key]

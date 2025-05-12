@@ -1,7 +1,9 @@
-﻿using agri_enegry.Models;
-using System.Collections.Generic; // Added for ICollection
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using agri_enegry.Models;
+using System.Collections.Generic; 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 
 namespace AgriEnergyConnect_st10255631_MVC.Models

@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using System.ComponentModel.DataAnnotations;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Models
 {
+    //allows for logging in + required fields
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Username")]

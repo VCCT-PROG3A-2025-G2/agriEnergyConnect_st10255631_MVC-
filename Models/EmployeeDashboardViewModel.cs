@@ -1,9 +1,12 @@
-﻿using agri_enegry.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
+// allows for viewing farmer info 
 namespace AgriEnergyConnect_st10255631_MVC.Models
 {
     public class EmployeeDashboardViewModel
