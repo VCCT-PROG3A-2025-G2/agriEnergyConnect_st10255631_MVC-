@@ -1,22 +1,363 @@
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    background-color: #E5DBCB; /* Soft beige background */
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+/* Adapted focus style to match green theme */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #4caf50; /* Green focus */
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px; /* From user's base */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* General font */
+    color: #333; /* General text color */
+    background-color: #E5DBCB; /* Soft beige background */
+}
+
+    /* --- Login Page Styles --- */
+    body.login-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #E5DBCB; /* Soft beige background for login */
+        margin: 0;
+    }
+
+.login-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+    .login-container h2 {
+        color: #2e7d32;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .login-container .form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #388e3c;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #a5d6a7;
+        border-radius: 4px;
+        background-color: #f1f8e9;
+    }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+    .login-container button {
+        width: 100%;
+        padding: 12px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+        .login-container button:hover {
+            background-color: #388e3c;
+        }
+
+
+body.dashboard-page {
+    margin: 0;
+    background-color: #E5DBCB; /* Soft beige background for dashboard */
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-header {
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .dashboard-header h1 {
+        margin: 0;
+        font-size: 1.8em;
+    }
+
+.user-info span {
+    margin-right: 15px;
+}
+
+.logout-button {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Farmer Dashboard Specific Header/Logout */
+body.farmer-dashboard .dashboard-header {
+    background-color: #388e3c;
+}
+
+body.farmer-dashboard .logout-button {
+    color: #c8e6c9;
+    border: 1px solid #c8e6c9;
+}
+
+    body.farmer-dashboard .logout-button:hover {
+        background-color: #c8e6c9;
+        color: #2e7d32;
+    }
+
+/* Employee Dashboard Specific Header/Logout */
+body.employee-dashboard .dashboard-header {
+    background-color: #2e7d32;
+}
+
+body.employee-dashboard .logout-button {
+    color: #b2dfdb;
+    border: 1px solid #b2dfdb;
+}
+
+    body.employee-dashboard .logout-button:hover {
+        background-color: #b2dfdb;
+        color: #1a531d;
+    }
+
+.dashboard-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+    .dashboard-section h2 {
+        margin-top: 0;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+/* Farmer Dashboard Section Styling */
+body.farmer-dashboard .dashboard-section {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+}
+
+    body.farmer-dashboard .dashboard-section h2 {
+        color: #2e7d32;
+        border-bottom: 2px solid #a5d6a7;
+    }
+
+/* Employee Dashboard Section Styling */
+body.employee-dashboard .dashboard-section {
+    padding: 25px;
+    background-color: #e0f2f1;
+    border: 1px solid #a7d7c5;
+}
+
+    body.employee-dashboard .dashboard-section h2 {
+        color: #1a531d;
+        border-bottom: 2px solid #81c784;
+    }
+
+.dashboard-section .form-group {
+    margin-bottom: 15px;
+}
+
+    .dashboard-section .form-group.inline-group {
+        display: flex;
+        gap: 20px;
+    }
+
+        .dashboard-section .form-group.inline-group > div {
+            flex: 1;
+        }
+
+.dashboard-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+body.farmer-dashboard .dashboard-section label {
+    color: #43a047;
+}
+
+body.employee-dashboard .dashboard-section label {
+    color: #388e3c;
+}
+
+.dashboard-section input[type="text"],
+.dashboard-section input[type="number"],
+.dashboard-section input[type="email"],
+.dashboard-section input[type="search"],
+.dashboard-section textarea,
+.dashboard-section select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+body.farmer-dashboard .dashboard-section input[type="text"],
+body.farmer-dashboard .dashboard-section input[type="number"],
+body.farmer-dashboard .dashboard-section textarea {
+    width: calc(100% - 22px);
+    border: 1px solid #a5d6a7;
+    background-color: #f1f8e9;
+}
+
+body.farmer-dashboard .dashboard-section textarea {
+    resize: vertical;
+}
+
+body.employee-dashboard .dashboard-section input[type="text"],
+body.employee-dashboard .dashboard-section input[type="email"],
+body.employee-dashboard .dashboard-section input[type="search"],
+body.employee-dashboard .dashboard-section input[type="number"],
+body.employee-dashboard .dashboard-section select {
+    border: 1px solid #a7d7c5;
+    background-color: #f0fff0;
+}
+
+body.employee-dashboard .dashboard-section select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23388E3C%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+.dashboard-section input:focus,
+.dashboard-section textarea:focus,
+.dashboard-section select:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+.dashboard-section .btn-primary,
+.dashboard-section .btn-secondary {
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-section .btn-primary {
+    padding: 10px 20px;
+    background-color: #4caf50;
+}
+
+
+.navbar-lightgreen {
+    background-color: #d4edda !important; /* Light green */
+    border-bottom: 1px solid #b7dfb7;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.03);
+}
+
+    /* Navbar brand/logo */
+    .navbar-lightgreen .navbar-brand {
+        color: #155724 !important;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
+
+        .navbar-lightgreen .navbar-brand:hover,
+        .navbar-lightgreen .navbar-brand:focus {
+            color: #0b2e13 !important;
+            text-decoration: none;
+        }
+
+    /* Navbar links */
+    .navbar-lightgreen .nav-link,
+    .navbar-lightgreen .navbar-text,
+    .navbar-lightgreen .btn-link {
+        color: #155724 !important;
+        transition: color 0.2s;
+    }
+
+        .navbar-lightgreen .nav-link:hover,
+        .navbar-lightgreen .nav-link:focus,
+        .navbar-lightgreen .btn-link:hover,
+        .navbar-lightgreen .btn-link:focus {
+            color: #388e3c !important;
+            text-decoration: underline;
+        }
+
+        /* Active link */
+        .navbar-lightgreen .nav-link.active {
+            color: #388e3c !important;
+            font-weight: 600;
+        }
+
+    /* Navbar toggler (hamburger) */
+    .navbar-lightgreen .navbar-toggler {
+        border-color: #a5d6a7;
+    }
+
+    .navbar-lightgreen .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(21,87,36,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    /* Navbar form button (logout) */
+    .navbar-lightgreen .btn-link.nav-link {
+        color: #155724 !important;
+        padding: 0;
+        margin-left: 10px;
+    }
+
+        .navbar-lightgreen .btn-link.nav-link:hover {
+            color: #388e3c !important;
+            text-decoration: underline;
+        }
+
+
+@media (max-width: 575.98px) {
+    .navbar-lightgreen .navbar-nav .nav-link,
+    .navbar-lightgreen .navbar-nav .navbar-text {
+        color: #155724 !important;
+    }
 }
