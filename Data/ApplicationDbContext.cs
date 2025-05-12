@@ -15,6 +15,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
         {
         }
 
+
         // DbSets are the tables in the database
         public DbSet<User> Users { get; set; }
         public DbSet<Farmer> Farmers { get; set; }
