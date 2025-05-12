@@ -1,9 +1,10 @@
-namespace agri_enegry.Models
-{
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
+namespace AgriEnergyConnect_st10255631_MVC.Models;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
+
+////////////////////////////////////////////////////////////END OF FILE////////////////////////////////////////////////////////////
