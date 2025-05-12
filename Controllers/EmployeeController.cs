@@ -1,4 +1,5 @@
-﻿using AgriEnergyConnect_st10255631_MVC.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using AgriEnergyConnect_st10255631_MVC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
+
+    // This can only be accessed by employee as per the requirments for part 2
 {
     [Authorize(Roles = "Employee")] // Only Employees can access this
     public class EmployeeController : Controller
     {
+        // Dependency injection for services and logger
         private readonly IFarmerService _farmerService;
         private readonly IProductService _productService;
         private readonly ILogger<EmployeeController> _logger;
@@ -81,13 +86,14 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
 
 
         [HttpGet]
-        public IActionResult AddFarmer()
+        public IActionResult AddFarmer() // return add farmer view
         {
 
             return View(new AddFarmerViewModel());
         }
 
 
+        // Handles the submission of the add farmer form
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFarmer(AddFarmerViewModel model)

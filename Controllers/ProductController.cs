@@ -1,4 +1,5 @@
-﻿using AgriEnergyConnect_st10255631_MVC.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using AgriEnergyConnect_st10255631_MVC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,12 +7,16 @@ using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
+
+    // This can only be accessed by farmers
     [Authorize(Roles = "Farmer")]
     public class ProductController : Controller
     {
+        // Dependency injection for services and logger
         private readonly IProductService _productService;
         private readonly IFarmerService _farmerService;
         private readonly ILogger<ProductController> _logger;
@@ -26,6 +31,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             _logger = logger;
         }
 
+        // Retrieves the currently logged-in farmer based on the user ID claim
         private async Task<Farmer?> GetCurrentFarmerAsync()
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -34,10 +40,11 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return await _farmerService.GetFarmerByUserIdAsync(userId);
         }
 
-        // GET: Product/FarmerProducts (Dashboard)
+        // GET: Product/FarmerProducts
+        // Displays the farmer's dashboard with their products
         public async Task<IActionResult> FarmerProducts()
         {
-            var farmer = await GetCurrentFarmerAsync();
+            var farmer = await GetCurrentFarmerAsync(); // Get the current farmer
             if (farmer == null)
             {
                 _logger.LogWarning("Farmer profile not found for logged-in user. Redirecting to login.");
@@ -45,7 +52,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             }
 
             var products = await _productService.GetProductsForFarmerAsync(farmer.Id);
-            ViewBag.FarmerName = farmer.Name;
+            ViewBag.FarmerName = farmer.Name; // Pasings farmer name to the view
 
             var viewModel = new FarmerDashboardViewModel
             {
@@ -61,7 +68,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(FarmerDashboardViewModel viewModel)
         {
-            var farmer = await GetCurrentFarmerAsync();
+            var farmer = await GetCurrentFarmerAsync(); // Get the current farmer
             if (farmer == null)
                 return RedirectToAction("Login", "Account");
 
@@ -73,7 +80,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             ModelState.Remove("NewProduct.AddedDate");
             ModelState.Remove("MyProducts");
 
-            if (ModelState.IsValid && productToAdd != null)
+            if (ModelState.IsValid && productToAdd != null) // If the model is valid and product is not null, add the product
             {
                 try
                 {
@@ -113,6 +120,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         }
 
         // POST: Product/Edit/5
+        // Does not work currenlty but view is still their 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
@@ -169,6 +177,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         }
 
         // POST: Product/Delete/5
+        // Used to delete entry only farmers can do this 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -186,3 +195,4 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         }
     }
 }
+////////////////////////////////////////////////////////////END OF FILE////////////////////////////////////////////////////////////

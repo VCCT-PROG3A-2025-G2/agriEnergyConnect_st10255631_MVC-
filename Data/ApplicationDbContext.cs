@@ -1,9 +1,13 @@
-﻿using AgriEnergyConnect_st10255631_MVC.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
+///
 namespace AgriEnergyConnect_st10255631_MVC.Data
 {
+
+    // ApplicationDbContext manages the database connection and entity sets
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -11,6 +15,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
         {
         }
 
+        // DbSets are the tables in the database
         public DbSet<User> Users { get; set; }
         public DbSet<Farmer> Farmers { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -18,17 +23,20 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
+            // this handles and make sure users can create the same user name
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
 
+            // One-to-one relationship: User <-> FarmerProfile
             modelBuilder.Entity<User>()
                 .HasOne(u => u.FarmerProfile)
                 .WithOne(f => f.User)
                 .HasForeignKey<Farmer>(f => f.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // One-to-many relationship: Farmer -> Products
             modelBuilder.Entity<Farmer>()
                 .HasMany(f => f.Products)
                 .WithOne(p => p.Farmer)
@@ -38,6 +46,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
             SeedInitialData(modelBuilder);
         }
 
+        // seeding the db with users and products
 
         private void SeedInitialData(ModelBuilder modelBuilder)
         {

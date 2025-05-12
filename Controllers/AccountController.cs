@@ -1,4 +1,5 @@
-﻿using AgriEnergyConnect_st10255631_MVC.Models;
+﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
+using AgriEnergyConnect_st10255631_MVC.Models;
 using AgriEnergyConnect_st10255631_MVC.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -7,14 +8,18 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
+    // controller job to handle login and logouts 
     public class AccountController : Controller
     {
+        // Dependency injection for account service and logger
         private readonly IAccountService _accountService;
         private readonly ILogger<AccountController> _logger;
 
+        // Constructor to inject dependencies
         public AccountController(IAccountService accountService, ILogger<AccountController> logger)
         {
             _accountService = accountService;
@@ -22,6 +27,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         }
 
 
+        // Displays the login page to the user
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -29,15 +35,16 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View();
         }
 
+        // Handles login form submission
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = returnUrl; // Store return URL for redirect after login
             if (ModelState.IsValid)
             {
-                var user = await _accountService.ValidateCredentialsAsync(model.Username, model.Password);
+                var user = await _accountService.ValidateCredentialsAsync(model.Username, model.Password); // Validate user credentials using the account service
 
                 if (user != null)
                 {
@@ -58,7 +65,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
                     {
 
                     };
-
+                    // Sign in the user with the created claims and authentication properties
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
@@ -103,7 +110,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             _logger.LogInformation("User logged out.");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home"); // when logged out return to home screen 
         }
 
 
