@@ -1,5 +1,14 @@
 # Agri-Energy Connect - Prototype Web Application
 
+# ORGINAL REPO 
+had a Issue with .net was using the ide rider on my mac and tried it on my virtual machine and it did not work transfer all the code to this repo thats why the commits are so low 
+https://github.com/Joshua-shields/AgriEnergyConnect_st10255631_MVC.git old repo 
+
+![Screenshot 2025-05-12 at 13 44 11](https://github.com/user-attachments/assets/76d52350-9383-4f5c-b4f1-6827fbb64bbd)
+
+
+
+
 ## Project Overview
 
 Portfolio of Evidence for the PROG7311 (Programming 3A) 
