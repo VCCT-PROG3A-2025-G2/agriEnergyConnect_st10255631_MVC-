@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 /////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
-namespace agri_enegry.Controllers
+namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
     public class FarmerController : Controller
     {

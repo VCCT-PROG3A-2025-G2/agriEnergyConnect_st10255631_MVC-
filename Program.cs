@@ -1,9 +1,12 @@
+/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
 using AgriEnergyConnect_st10255631_MVC.Data;
 using AgriEnergyConnect_st10255631_MVC.Repositories;
 using AgriEnergyConnect_st10255631_MVC.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+/////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +24,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddControllersWithViews();
 
-// Configure DbContext with SQLite
+// ConfigurING DbContext with SQLite
 var dbName = builder.Configuration.GetConnectionString("DefaultConnection")!
     .Split('=')[1];
 var dbPath = Path.Combine(builder.Environment.ContentRootPath, dbName);
@@ -31,12 +34,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-// TODO: Register IFarmerRepository when you create it
+
 
 // Register Services
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
-// TODO: Register IFarmerService when you create it
+
 
 
 // Register Repositories
@@ -87,3 +90,4 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+///////////////////////////////////////////////////END OF FILE//////////////////////////////////////////////
