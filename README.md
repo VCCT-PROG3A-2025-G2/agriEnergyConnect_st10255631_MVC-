@@ -46,8 +46,7 @@ SQLite, file-based
 
 * Data has already been entered to the dd employees and farmers as well as products using this method
   
-![Screenshot 2025-05-12 at 16 17 12](https://github.com/user-attachments/assets/9e52af75-c894-46b6-9328-557f1f305172)
-![Screenshot 2025-05-12 at 16 17 49](https://github.com/user-attachments/assets/2a5567b9-c9a4-4a17-bbcd-0031d073c34e)
+
 
 The location of the connection string is located in appsetting.json the file look like this 
 ![Screenshot 2025-05-12 at 16 18 42](https://github.com/user-attachments/assets/16cf45fb-948e-45a8-9ff8-3faf5ae9f26b)
@@ -72,18 +71,20 @@ The system supports two distinct user roles. Sample user accounts should have be
 
 Sample account go as follows:
 
-Employee Account
-Username: employee01
-Password: EmpP@ss123
-Role: Employee
-Farmer Account 1
-Username: farmerJohn
-Password: FarmP@ss123
-Role: Farmer
-Farmer Account 2
-Username: farmerJane
-Password: FarmP@ss456
-Role: Farmer
+### Employee Account
+- **Username:** Clive
+- **Password:** cliveemp123
+- **Role:** Employee
+
+### Farmer Account 1
+- **Username:** Matt
+- **Password:** southafrica
+- **Role:** Farmer
+
+### Farmer Account 2
+- **Username:** LukeC
+- **Password:** suidAfrika
+- **Role:** Farmer
 
 ## System Functionalities
 
