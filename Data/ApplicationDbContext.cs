@@ -54,8 +54,8 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
             var employeeUser = new User
             {
                 Id = 1,
-                Username = "employee01",
-                PasswordHash = "EmpP@ss123", // Storing plain text
+                Username = "Clive",
+                PasswordHash = "cliveemp123", 
                 Role = "Employee"
             };
             modelBuilder.Entity<User>().HasData(employeeUser);
@@ -63,8 +63,8 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
             var farmerUser1 = new User
             {
                 Id = 2,
-                Username = "farmerJohn",
-                PasswordHash = "FarmP@ss123",
+                Username = "Matt",
+                PasswordHash = "southafrica",
                 Role = "Farmer"
             };
             modelBuilder.Entity<User>().HasData(farmerUser1);
@@ -72,8 +72,8 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
             var farmerUser2 = new User
             {
                 Id = 3,
-                Username = "farmerJane",
-                PasswordHash = "FarmP@ss456",
+                Username = "LukeC",
+                PasswordHash = "suidAfrika",
                 Role = "Farmer"
             };
             modelBuilder.Entity<User>().HasData(farmerUser2);
@@ -82,15 +82,15 @@ namespace AgriEnergyConnect_st10255631_MVC.Data
                 new Farmer
                 {
                     Id = 1,
-                    Name = "John's Sunny Acres",
-                    ContactDetails = "john@sunnyacres.com, 555-0101",
+                    Name = "Matthew Allison",
+                    ContactDetails = "matt12@gmail.com, 555-0101",
                     UserId = farmerUser1.Id
                 },
                 new Farmer
                 {
                     Id = 2,
-                    Name = "Jane's Green Fields",
-                    ContactDetails = "jane@greenfields.org, 555-0202",
+                    Name = "Luke Carlous",
+                    ContactDetails = "lukec@jam.org, 555-0202",
                     UserId = farmerUser2.Id
                 }
             );
