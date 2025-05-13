@@ -30,7 +30,7 @@ The prototype demonstrates core functionalities for a platform designed to bridg
 7.  [Notes and Troubleshooting](#notes-and-troubleshooting)
 
 ## Prerequisites
-NET 8 SDK 
+NET 8 SDK if not installed https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 Visual Studio 2022
 SQLite, file-based
 
@@ -97,5 +97,23 @@ Backend: ASP.NET Core MVC .NET 8
 Database: SQLite using Entity Framework Core
 Frontend: Razor Views and Bootstrap 
 Authentication: ASP.NET Core Cookie Authentication
+
+## References
+GeeksforGeeks (2022). MVC Framework Introduction. [online] GeeksforGeeks. Available at: https://www.geeksforgeeks.org/mvc-framework-introduction/. [Accessed 2 April 2025]
+Microsoft. (2025). Entity Framework documentation. Microsoft Learn. Available at: https://learn.microsoft.com/en-us/ef/ [Accessed: 14 April 2025]
+www.youtube.com. (2023). CSS Tutorial – Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=OXGznpKZ_sA. [Accessed 8 April 2025] 
+www.youtube.com. (2022). Learn HTML – Full Tutorial for Beginners (2022). [online] Available at: ç. [Accessed 11 April 2025]
+GeeksforGeeks. (2024). Web Development. [online] Available at: https://www.geeksforgeeks.org/web-development/. [Accessed 12 April 2025]
+
+## Annexure of AI use
+I Joshua Shields ST10255631 use AI in my assignment:
+AI used: Claude 
+Used to help with seeding the db
+Date used: 12 April 
+
+Screenshot of chat conversations 
+![Screenshot 2025-05-13 at 19 01 13](https://github.com/user-attachments/assets/02982956-567f-4dac-82c6-fcf669d8bd1c)
+![Screenshot 2025-05-13 at 19 01 24](https://github.com/user-attachments/assets/438b6e91-5171-4e07-b041-6d588274b6d6)
+
 
 
