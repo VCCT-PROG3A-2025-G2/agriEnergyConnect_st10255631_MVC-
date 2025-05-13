@@ -46,10 +46,13 @@ SQLite, file-based
 
 * Data has already been entered to the dd employees and farmers as well as products using this method
   
+![Screenshot 2025-05-13 at 18 29 09](https://github.com/user-attachments/assets/a5207591-923f-4014-9420-9f7529481224)
 
+![Screenshot 2025-05-13 at 18 30 05](https://github.com/user-attachments/assets/ee8f8200-9f0a-4109-b8f7-b340cbbc6a7d)
 
 The location of the connection string is located in appsetting.json the file look like this 
 ![Screenshot 2025-05-12 at 16 18 42](https://github.com/user-attachments/assets/16cf45fb-948e-45a8-9ff8-3faf5ae9f26b)
+
 
 
 ## Building and Running the Prototype
