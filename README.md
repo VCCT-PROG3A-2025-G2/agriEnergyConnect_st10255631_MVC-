@@ -1,7 +1,7 @@
 # Agri-Energy Connect - Prototype Web Application
 
 # ORGINAL REPO 
-had a Issue with .net was using the ide rider on my mac and tried it on my virtual machine and it did not work transfer all the code to this repo thats why the commits are so low 
+Had a Issue with .net was using the ide rider on my mac and tried it on my virtual machine and it did not work transfer all the code to this repo thats why the commits are so low 
 https://github.com/Joshua-shields/AgriEnergyConnect_st10255631_MVC.git old repo 
 
 ![Screenshot 2025-05-12 at 13 44 11](https://github.com/user-attachments/assets/76d52350-9383-4f5c-b4f1-6827fbb64bbd)
@@ -30,12 +30,31 @@ The prototype demonstrates core functionalities for a platform designed to bridg
 7.  [Notes and Troubleshooting](#notes-and-troubleshooting)
 
 ## Prerequisites
-
+NET 8 SDK 
+Visual Studio 2022
+SQLite, file-based
 
 ## Setup Instructions
+* Clone repo or unzip project
+* Open the solution folder
+* When code is run DB with be seeded(populated with data)
+
+## Database setup
+* On first run, the database file called agrienergy_connect.db will be created in the project directory.
+
+![Screenshot 2025-05-12 at 16 15 23](https://github.com/user-attachments/assets/51d0e893-dbb9-4f79-926a-b481ca42dd7b)
+
+* Data has already been entered to the dd employees and farmers as well as products using this method
+  
+![Screenshot 2025-05-12 at 16 17 12](https://github.com/user-attachments/assets/9e52af75-c894-46b6-9328-557f1f305172)
+![Screenshot 2025-05-12 at 16 17 49](https://github.com/user-attachments/assets/2a5567b9-c9a4-4a17-bbcd-0031d073c34e)
+
+The location of the connection string is located in appsetting.json the file look like this 
+![Screenshot 2025-05-12 at 16 18 42](https://github.com/user-attachments/assets/16cf45fb-948e-45a8-9ff8-3faf5ae9f26b)
 
 
 ## Building and Running the Prototype
+* click the run button or you can use the terminal a type into the terminal dotnet build dotnet run --project AgriEnergyConnect_st10255631_MVC * would need to replace with actual path 
 
 
 ## User Roles and Credentials
@@ -51,6 +70,28 @@ The system supports two distinct user roles. Sample user accounts should have be
     *   Can view all products from any specific farmer.
     *   Can filter product searches (e.g., by date range, product type).
 
+Sample account go as follows:
+
+Employee Account
+Username: employee01
+Password: EmpP@ss123
+Role: Employee
+Farmer Account 1
+Username: farmerJohn
+Password: FarmP@ss123
+Role: Farmer
+Farmer Account 2
+Username: farmerJane
+Password: FarmP@ss456
+Role: Farmer
+
 ## System Functionalities
+
+## Tech stack 
+Technology Stack
+Backend: ASP.NET Core MVC .NET 8
+Database: SQLite using Entity Framework Core
+Frontend: Razor Views and Bootstrap 
+Authentication: ASP.NET Core Cookie Authentication
 
 
