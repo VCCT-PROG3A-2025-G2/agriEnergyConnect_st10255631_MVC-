@@ -7,27 +7,26 @@ https://github.com/Joshua-shields/AgriEnergyConnect_st10255631_MVC.git old repo
 ![Screenshot 2025-05-12 at 13 44 11](https://github.com/user-attachments/assets/76d52350-9383-4f5c-b4f1-6827fbb64bbd)
 
 
+## Table of Contents
 
+1. [Project Overview](#project-overview)
+2. [Prerequisites](#prerequisites)
+3. [Setup Instructions](#setup-instructions)
+4. [Database Setup](#database-setup)
+5. [Building and Running the Prototype](#building-and-running-the-prototype)
+6. [User Roles and Credentials](#user-roles-and-credentials)
+7. [System Functionalities](#system-functionalities)
+8. [Tech Stack](#tech-stack)
+9. [Notes and Troubleshooting](#notes-and-troubleshooting)
+10. [References](#references)
+11. [Annexure of AI Use](#annexure-of-ai-use)
 
 ## Project Overview
 
 Portfolio of Evidence for the PROG7311 (Programming 3A) 
 The prototype demonstrates core functionalities for a platform designed to bridge the gap between the agricultural sector and green energy technology providers. It includes features for two main user roles: Farmers and Employees.
 
-## Table of Contents
 
-1.  [Prerequisites](#prerequisites)
-2.  [Setup Instructions](#setup-instructions)
-    *   [Database Setup](#database-setup)
-    *   [Application Configuration](#application-configuration)
-3.  [Building and Running the Prototype](#building-and-running-the-prototype)
-4.  [User Roles and Credentials](#user-roles-and-credentials)
-5.  [System Functionalities](#system-functionalities)
-    *   [Authentication](#authentication)
-    *   [Farmer Role Features](#farmer-role-features)
-    *   [Employee Role Features](#employee-role-features)
-6.  [Technology Stack](#technology-stack)
-7.  [Notes and Troubleshooting](#notes-and-troubleshooting)
 
 ## Prerequisites
 NET 8 SDK if not installed https://dotnet.microsoft.com/en-us/download/dotnet/8.0
@@ -112,8 +111,26 @@ Used to help with seeding the db
 Date used: 12 April 
 
 Screenshot of chat conversations 
-![Screenshot 2025-05-13 at 19 01 13](https://github.com/user-attachments/assets/02982956-567f-4dac-82c6-fcf669d8bd1c)
-![Screenshot 2025-05-13 at 19 01 24](https://github.com/user-attachments/assets/438b6e91-5171-4e07-b041-6d588274b6d6)
+![Screenshot overview ](https://github.com/user-attachments/assets/dc208e1e-a9d3-4eb8-91a0-fe299b5da37c)
 
+![Screenshot chat 1](https://github.com/user-attachments/assets/02982956-567f-4dac-82c6-fcf669d8bd1c)
+![Screenshot chat 1 contuined](https://github.com/user-attachments/assets/438b6e91-5171-4e07-b041-6d588274b6d6)
+
+Used to help with role based access 
+AI used: Gemini
+Date used 20 April 
+![Gemini chat role based](https://github.com/user-attachments/assets/a382afd1-b6f8-41c3-a70c-ec9d79b39740)
+
+
+Used AI as i had a issue with the Database 
+AI used: Claude 
+Date used 7 May 2025
+![DB issue](https://github.com/user-attachments/assets/084caacd-d3d7-439f-ad0e-7f81e3f50bf1)
+
+Used AI on how to go about UX testing 
+AI used: T3 chat (o3 mini model)
+
+![UX test 1](https://github.com/user-attachments/assets/dfdf99a1-3598-4890-8061-fa1f9b42ab7d)
+![UX TEST 2](https://github.com/user-attachments/assets/0e1ce2a5-56b2-48fc-b2de-fab83f0c762f)
 
 
