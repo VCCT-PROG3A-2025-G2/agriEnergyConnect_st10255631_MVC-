@@ -1,7 +1,7 @@
 # Agri-Energy Connect - Prototype Web Application
 
-# ORGINAL REPO 
-Had a Issue with .net was using the ide rider on my mac and tried it on my virtual machine and it did not work transfer all the code to this repo thats why the commits are so low 
+## ORIGINAL REPO
+The original development was done using Rider IDE on macOS, but due to .NET compatibility issues, the project was transferred to this repository. This is why the commit history is so low 
 https://github.com/Joshua-shields/AgriEnergyConnect_st10255631_MVC.git old repo 
 
 ![Screenshot 2025-05-12 at 13 44 11](https://github.com/user-attachments/assets/76d52350-9383-4f5c-b4f1-6827fbb64bbd)
@@ -40,10 +40,11 @@ SQLite, file-based
 
 ## Database setup
 * On first run, the database file called agrienergy_connect.db will be created in the project directory.
+* No manual DB setup is required
 
 ![Screenshot 2025-05-12 at 16 15 23](https://github.com/user-attachments/assets/51d0e893-dbb9-4f79-926a-b481ca42dd7b)
 
-* Data has already been entered to the dd employees and farmers as well as products using this method
+* Data has already been entered to the db employees and farmers as well as products using this method
   
 ![Screenshot 2025-05-13 at 18 29 09](https://github.com/user-attachments/assets/a5207591-923f-4014-9420-9f7529481224)
 
@@ -56,21 +57,6 @@ The location of the connection string is located in appsetting.json the file loo
 
 ## Building and Running the Prototype
 * click the run button or you can use the terminal a type into the terminal dotnet build dotnet run --project AgriEnergyConnect_st10255631_MVC * would need to replace with actual path 
-
-
-## User Roles and Credentials
-
-The system supports two distinct user roles. Sample user accounts should have been created by the database setup script.
-
-*   **Farmer:**
-    *   Can add products to their profile.
-    *   Can view their own product listings.
-  
-*   **Employee:**
-    *   Can add new farmer profiles to the system.
-    *   Can view all products from any specific farmer.
-    *   Can filter product searches (e.g., by date range, product type).
-
 Sample account go as follows:
 
 ### Employee Account
@@ -89,6 +75,18 @@ Sample account go as follows:
 - **Role:** Farmer
 
 ## System Functionalities
+## User Roles and Credentials
+
+The system supports two distinct user roles. Sample user accounts should have been created by the database setup script.
+
+*   **Farmer:**
+    *   Can add products to their profile.
+    *   Can view their own product listings.
+  
+*   **Employee:**
+    *   Can add new farmer profiles to the system.
+    *   Can view all products from any specific farmer.
+    *   Can filter product searches (e.g., by date range, product type).
 
 ## Tech stack 
 Technology Stack
@@ -131,6 +129,7 @@ Date used 7 May 2025
 
 Used AI on how to go about UX testing 
 AI used: T3 chat (o3 mini model)
+Date used: 10 May 2025
 
 ![UX test 1](https://github.com/user-attachments/assets/dfdf99a1-3598-4890-8061-fa1f9b42ab7d)
 ![UX TEST 2](https://github.com/user-attachments/assets/0e1ce2a5-56b2-48fc-b2de-fab83f0c762f)
