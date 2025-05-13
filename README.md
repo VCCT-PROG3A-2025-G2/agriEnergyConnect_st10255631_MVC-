@@ -98,11 +98,11 @@ Frontend: Razor Views and Bootstrap
 Authentication: ASP.NET Core Cookie Authentication
 
 ## References
-GeeksforGeeks (2022). MVC Framework Introduction. [online] GeeksforGeeks. Available at: https://www.geeksforgeeks.org/mvc-framework-introduction/. [Accessed 2 April 2025]
-Microsoft. (2025). Entity Framework documentation. Microsoft Learn. Available at: https://learn.microsoft.com/en-us/ef/ [Accessed: 14 April 2025]
-www.youtube.com. (2023). CSS Tutorial – Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=OXGznpKZ_sA. [Accessed 8 April 2025] 
-www.youtube.com. (2022). Learn HTML – Full Tutorial for Beginners (2022). [online] Available at: ç. [Accessed 11 April 2025]
-GeeksforGeeks. (2024). Web Development. [online] Available at: https://www.geeksforgeeks.org/web-development/. [Accessed 12 April 2025]
+** GeeksforGeeks (2022). MVC Framework Introduction. [online] GeeksforGeeks. Available at: https://www.geeksforgeeks.org/mvc-framework-introduction/. [Accessed 2 April 2025]
+** Microsoft. (2025). Entity Framework documentation. Microsoft Learn. Available at: https://learn.microsoft.com/en-us/ef/ [Accessed: 14 April 2025]
+** www.youtube.com. (2023). CSS Tutorial – Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=OXGznpKZ_sA. [Accessed 8 April 2025] 
+** www.youtube.com. (2022). Learn HTML – Full Tutorial for Beginners (2022). [online] Available at: ç. [Accessed 11 April 2025]
+** GeeksforGeeks. (2024). Web Development. [online] Available at: https://www.geeksforgeeks.org/web-development/. [Accessed 12 April 2025]
 
 ## Annexure of AI use
 I Joshua Shields ST10255631 use AI in my assignment:
