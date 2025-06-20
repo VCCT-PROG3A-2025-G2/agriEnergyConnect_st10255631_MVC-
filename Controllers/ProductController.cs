@@ -4,195 +4,103 @@ using AgriEnergyConnect_st10255631_MVC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 /////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
+
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
-
-    // This can only be accessed by farmers
     [Authorize(Roles = "Farmer")]
     public class ProductController : Controller
     {
-        // Dependency injection for services and logger
-        private readonly IProductService _productService;
-        private readonly IFarmerService _farmerService;
+        private readonly IProductWorkflowService _productWorkflowService;
         private readonly ILogger<ProductController> _logger;
 
         public ProductController(
-            IProductService productService,
-            IFarmerService farmerService,
+            IProductWorkflowService productWorkflowService,
             ILogger<ProductController> logger)
         {
-            _productService = productService;
-            _farmerService = farmerService;
+            _productWorkflowService = productWorkflowService;
             _logger = logger;
         }
 
-        // Retrieves the currently logged-in farmer based on the user ID claim
-        private async Task<Farmer?> GetCurrentFarmerAsync()
-        {
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
-                return null;
-            return await _farmerService.GetFarmerByUserIdAsync(userId);
-        }
-
-        // GET: Product/FarmerProducts
-        // Displays the farmer's dashboard with their products
         public async Task<IActionResult> FarmerProducts()
         {
-            var farmer = await GetCurrentFarmerAsync(); // Get the current farmer
-            if (farmer == null)
-            {
-                _logger.LogWarning("Farmer profile not found for logged-in user. Redirecting to login.");
+            var result = await _productWorkflowService.GetFarmerDashboardAsync(User);
+            if (!result.Success)
                 return RedirectToAction("Login", "Account");
-            }
 
-            var products = await _productService.GetProductsForFarmerAsync(farmer.Id);
-            ViewBag.FarmerName = farmer.Name; // Pasings farmer name to the view
-
-            var viewModel = new FarmerDashboardViewModel
-            {
-                NewProduct = new Product { ProductionDate = DateTime.Today },
-                MyProducts = products
-            };
-
-            return View("~/Views/Home/FarmerDashboard.cshtml", viewModel);
+            ViewBag.FarmerName = result.FarmerName;
+            return View("~/Views/Home/FarmerDashboard.cshtml", result.ViewModel);
         }
 
-        // POST: Product/Add (from dashboard)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(FarmerDashboardViewModel viewModel)
         {
-            var farmer = await GetCurrentFarmerAsync(); // Get the current farmer
-            if (farmer == null)
+            var result = await _productWorkflowService.AddProductAsync(User, viewModel);
+            if (result.RedirectToLogin)
                 return RedirectToAction("Login", "Account");
 
-            var productToAdd = viewModel.NewProduct;
-
-            ModelState.Remove("NewProduct.Id");
-            ModelState.Remove("NewProduct.FarmerId");
-            ModelState.Remove("NewProduct.Farmer");
-            ModelState.Remove("NewProduct.AddedDate");
-            ModelState.Remove("MyProducts");
-
-            if (ModelState.IsValid && productToAdd != null) // If the model is valid and product is not null, add the product
+            if (result.Success)
             {
-                try
-                {
-                    await _productService.AddProductForFarmerAsync(productToAdd, farmer.Id);
-                    TempData["SuccessMessage"] = "Product added successfully!";
-                    return RedirectToAction(nameof(FarmerProducts));
-                }
-                catch (System.Exception ex)
-                {
-                    _logger.LogError(ex, "Error adding product for farmer {FarmerId}", farmer.Id);
-                    ModelState.AddModelError("", "An error occurred while adding the product. Please try again.");
-                }
+                TempData["SuccessMessage"] = "Product added successfully!";
+                return RedirectToAction(nameof(FarmerProducts));
             }
 
-            var existingProducts = await _productService.GetProductsForFarmerAsync(farmer.Id);
-            ViewBag.FarmerName = farmer.Name;
-            var newViewModel = new FarmerDashboardViewModel
-            {
-                NewProduct = productToAdd ?? new Product { ProductionDate = DateTime.Today },
-                MyProducts = existingProducts
-            };
-            return View("~/Views/Home/FarmerDashboard.cshtml", newViewModel);
+            ViewBag.FarmerName = result.FarmerName;
+            return View("~/Views/Home/FarmerDashboard.cshtml", result.ViewModel);
         }
 
-        // GET: Product/Edit/5
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var farmer = await GetCurrentFarmerAsync();
-            if (farmer == null) return RedirectToAction("Login", "Account");
-
-            var product = await _productService.GetProductByIdAsync(id);
-            if (product == null || product.FarmerId != farmer.Id)
+            var result = await _productWorkflowService.GetEditProductAsync(User, id);
+            if (result.RedirectToLogin)
+                return RedirectToAction("Login", "Account");
+            if (!result.Success)
                 return NotFound();
 
-            return View("EditProduct", product);
+            return View("EditProduct", result.Product);
         }
 
-        // POST: Product/Edit/5
-        // Does not work currenlty but view is still their 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
         {
-            var farmer = await GetCurrentFarmerAsync();
-            if (farmer == null) return RedirectToAction("Login", "Account");
+            var result = await _productWorkflowService.EditProductAsync(User, id, product);
+            if (result.RedirectToLogin)
+                return RedirectToAction("Login", "Account");
+            if (!result.Success)
+                return View("EditProduct", product);
 
-            if (id != product.Id)
-                return NotFound();
-
-            var originalProduct = await _productService.GetProductByIdAsync(id);
-            if (originalProduct == null || originalProduct.FarmerId != farmer.Id)
-                return NotFound();
-
-            product.FarmerId = originalProduct.FarmerId;
-            product.AddedDate = originalProduct.AddedDate;
-            product.Farmer = null;
-
-            ModelState.Remove("Farmer");
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _productService.UpdateProductAsync(product);
-                    TempData["SuccessMessage"] = "Product updated successfully!";
-                    return RedirectToAction(nameof(FarmerProducts));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    ModelState.AddModelError("", "The product was modified by another user. Please try again.");
-                }
-                catch (System.Exception ex)
-                {
-                    _logger.LogError(ex, "Error updating product {ProductId}", product.Id);
-                    ModelState.AddModelError("", "An error occurred while updating the product.");
-                }
-            }
-            return View("EditProduct", product);
+            TempData["SuccessMessage"] = "Product updated successfully!";
+            return RedirectToAction(nameof(FarmerProducts));
         }
 
-        // GET: Product/Delete/5
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var farmer = await GetCurrentFarmerAsync();
-            if (farmer == null) return RedirectToAction("Login", "Account");
-
-            var product = await _productService.GetProductByIdAsync(id);
-            if (product == null || product.FarmerId != farmer.Id)
+            var result = await _productWorkflowService.GetDeleteProductAsync(User, id);
+            if (result.RedirectToLogin)
+                return RedirectToAction("Login", "Account");
+            if (!result.Success)
                 return NotFound();
 
-            return View("DeleteProduct", product);
+            return View("DeleteProduct", result.Product);
         }
 
-        // POST: Product/Delete/5
-        // Used to delete entry only farmers can do this 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var farmer = await GetCurrentFarmerAsync();
-            if (farmer == null) return RedirectToAction("Login", "Account");
+            var result = await _productWorkflowService.DeleteProductAsync(User, id);
+            if (result.RedirectToLogin)
+                return RedirectToAction("Login", "Account");
 
-            var product = await _productService.GetProductByIdAsync(id);
-            if (product == null || product.FarmerId != farmer.Id)
-                return NotFound();
-
-            await _productService.DeleteProductAsync(id);
             TempData["SuccessMessage"] = "Product deleted successfully!";
             return RedirectToAction(nameof(FarmerProducts));
         }
     }
 }
-////////////////////////////////////////////////////////////END OF FILE////////////////////////////////////////////////////////////
+/////////////////////////////////////////END OF FILE//////////////////////////////////////////////////////////////////

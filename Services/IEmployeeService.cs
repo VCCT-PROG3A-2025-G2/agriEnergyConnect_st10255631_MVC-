@@ -1,18 +1,14 @@
 ﻿/////////////////////////////////////////START OF IMPORTS//////////////////////////////////////////////////////////////////
 using AgriEnergyConnect_st10255631_MVC.Models;
-using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 /////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
 namespace AgriEnergyConnect_st10255631_MVC.Services
 {
-    public interface IAccountService
+    public interface IEmployeeService
     {
-        Task<User?> ValidateCredentialsAsync(string username, string password);
-
-        Task<(bool Success, string? ErrorMessage, string? Role)> SignInAsync(HttpContext httpContext, LoginViewModel model);
-
-        Task SignOutAsync(HttpContext httpContext);
+        Task<EmployeeDashboardViewModel> GetDashboardViewModelAsync(EmployeeDashboardViewModel filterModel);
+        Task<(bool Success, string? ErrorMessage)> AddFarmerAsync(AddFarmerViewModel model);
     }
 }
 /////////////////////////////////////////END OF FILE//////////////////////////////////////////////////////////////////

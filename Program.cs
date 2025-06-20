@@ -7,10 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 /////////////////////////////////////////END OF IMPORTS//////////////////////////////////////////////////////////////////
 
-
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 // Configure Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -24,23 +21,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddControllersWithViews();
 
-// ConfigurING DbContext with SQLite
+// Configure DbContext with SQLite
 var dbName = builder.Configuration.GetConnectionString("DefaultConnection")!
     .Split('=')[1];
 var dbPath = Path.Combine(builder.Environment.ContentRootPath, dbName);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite($"Data Source={dbPath}"));
-
-// Register Repositories
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-// Register Services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
-
-
 
 // Register Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -52,9 +38,11 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IFarmerService, FarmerService>();
 
+// Register new/updated services for business logic
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IProductWorkflowService, ProductWorkflowService>();
 
 var app = builder.Build();
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -72,7 +60,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 using (var scope = app.Services.CreateScope())
 {

@@ -49,7 +49,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             var newUser = new User
             {
                 Username = model.Username,
-                PasswordHash = model.Password, // For prototype only!
+                PasswordHash = model.Password, 
                 Role = "Farmer"
             };
 
