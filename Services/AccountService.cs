@@ -15,11 +15,13 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
     {
         private readonly IUserRepository _userRepository;
 
+        // Constructor to inject the user repository
         public AccountService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
+        // Validates the user's credentials
         public async Task<User?> ValidateCredentialsAsync(string username, string password)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
@@ -28,12 +30,14 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return null;
         }
 
+        // Signs in the user and creates authentication cookies
         public async Task<(bool Success, string? ErrorMessage, string? Role)> SignInAsync(HttpContext httpContext, LoginViewModel model)
         {
             var user = await ValidateCredentialsAsync(model.Username, model.Password);
             if (user == null)
                 return (false, "Invalid login attempt.", null);
 
+            // Create claims for the user
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
@@ -41,6 +45,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
+            // Create identity and sign in
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await httpContext.SignInAsync(
@@ -51,6 +56,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return (true, null, user.Role);
         }
 
+        // Signs out the current user
         public async Task SignOutAsync(HttpContext httpContext)
         {
             await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

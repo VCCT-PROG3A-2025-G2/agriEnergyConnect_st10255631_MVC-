@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
+    // Only users with the "Farmer" role can access this controller
     [Authorize(Roles = "Farmer")]
     public class ProductController : Controller
     {
@@ -24,6 +25,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             _logger = logger;
         }
 
+        // Displays the farmer's dashboard with their products
         public async Task<IActionResult> FarmerProducts()
         {
             var result = await _productWorkflowService.GetFarmerDashboardAsync(User);
@@ -34,6 +36,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View("~/Views/Home/FarmerDashboard.cshtml", result.ViewModel);
         }
 
+        // Handles adding a new product
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(FarmerDashboardViewModel viewModel)
@@ -52,6 +55,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View("~/Views/Home/FarmerDashboard.cshtml", result.ViewModel);
         }
 
+        // Displays the edit product page
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -64,6 +68,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View("EditProduct", result.Product);
         }
 
+        // Handles editing a product
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
@@ -78,6 +83,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return RedirectToAction(nameof(FarmerProducts));
         }
 
+        // Displays the delete product confirmation page
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -90,6 +96,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View("DeleteProduct", result.Product);
         }
 
+        // Handles deleting a product
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AgriEnergyConnect_st10255631_MVC.Controllers
 {
+    // Controller for account-related actions
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -19,6 +20,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             _logger = logger;
         }
 
+        // Displays the login page
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -26,6 +28,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return View();
         }
 
+        // Handles login form submission
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
@@ -56,6 +59,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             }
         }
 
+        // Handles user logout
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -65,6 +69,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // Displays the access denied page
         [HttpGet]
         public IActionResult AccessDenied()
         {

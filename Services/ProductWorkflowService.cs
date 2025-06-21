@@ -12,10 +12,12 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
 {
     public class ProductWorkflowService : IProductWorkflowService
     {
+        // Dependencies for farmer, product services, and logging
         private readonly IFarmerService _farmerService;
         private readonly IProductService _productService;
         private readonly ILogger<ProductWorkflowService> _logger;
 
+        // Constructor to inject dependencies
         public ProductWorkflowService(
             IFarmerService farmerService,
             IProductService productService,
@@ -26,6 +28,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             _logger = logger;
         }
 
+        // Helper method to get the current farmer based on the logged-in user
         private async Task<Farmer?> GetCurrentFarmerAsync(ClaimsPrincipal user)
         {
             var userIdString = user.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -34,6 +37,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return await _farmerService.GetFarmerByUserIdAsync(userId);
         }
 
+        // Gets the dashboard view model for the current farmer
         public async Task<(bool Success, bool RedirectToLogin, string? FarmerName, FarmerDashboardViewModel ViewModel)> GetFarmerDashboardAsync(ClaimsPrincipal user)
         {
             var farmer = await GetCurrentFarmerAsync(user);
@@ -49,6 +53,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return (true, false, farmer.Name, viewModel);
         }
 
+        // Adds a new product for the current farmer and returns the updated dashboard
         public async Task<(bool Success, bool RedirectToLogin, string? FarmerName, FarmerDashboardViewModel ViewModel)> AddProductAsync(ClaimsPrincipal user, FarmerDashboardViewModel viewModel)
         {
             var farmer = await GetCurrentFarmerAsync(user);
@@ -71,6 +76,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             }
             catch (Exception ex)
             {
+                // Log the error if adding the product fails
                 _logger.LogError(ex, "Error adding product for farmer {FarmerId}", farmer.Id);
                 var products = await _productService.GetProductsForFarmerAsync(farmer.Id);
                 var newViewModel = new FarmerDashboardViewModel
@@ -82,6 +88,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             }
         }
 
+        // Gets the product to edit for the current farmer by product ID
         public async Task<(bool Success, bool RedirectToLogin, Product? Product)> GetEditProductAsync(ClaimsPrincipal user, int id)
         {
             var farmer = await GetCurrentFarmerAsync(user);
@@ -94,6 +101,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return (true, false, product);
         }
 
+        // Edits the product for the current farmer by product ID
         public async Task<(bool Success, bool RedirectToLogin)> EditProductAsync(ClaimsPrincipal user, int id, Product product)
         {
             var farmer = await GetCurrentFarmerAsync(user);
@@ -121,6 +129,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             }
         }
 
+        // Gets the product to delete for the current farmer by product ID
         public async Task<(bool Success, bool RedirectToLogin, Product? Product)> GetDeleteProductAsync(ClaimsPrincipal user, int id)
         {
             var farmer = await GetCurrentFarmerAsync(user);
@@ -133,6 +142,7 @@ namespace AgriEnergyConnect_st10255631_MVC.Services
             return (true, false, product);
         }
 
+        // Deletes the product for the current farmer by product ID
         public async Task<(bool Success, bool RedirectToLogin)> DeleteProductAsync(ClaimsPrincipal user, int id)
         {
             var farmer = await GetCurrentFarmerAsync(user);
