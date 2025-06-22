@@ -59,6 +59,8 @@ The location of the connection string is located in appsetting.json the file loo
 * click the run button or you can use the terminal a type into the terminal dotnet build dotnet run --project AgriEnergyConnect_st10255631_MVC * would need to replace with actual path 
 Sample account go as follows:
 
+### When the user gets to the home screen they need to press the login button and then enter one of the details below to enter 
+
 ### Employee Account
 - **Username:** Clive
 - **Password:** cliveemp123
